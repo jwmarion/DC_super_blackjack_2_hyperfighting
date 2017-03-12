@@ -22,10 +22,48 @@ $(document).ready(function () {
     return('cards/' + this.point +'_'+ this.suit+'.png');
   };
 
-  function Hand(){
-    this.cards = [];
+  function Monster(name){
     this.energy = 10;
     this.health = 16;
+    this.name = name;
+    // this.guard = false;
+    // if (name === 'robot'){
+    //   this.name = $('#robot');
+    // }
+    // else{
+    //   this.name = $('#godzilla');
+    // }
+
+  }
+
+  Monster.prototype.attack = function(player){
+    if (this.energy >= 16){
+      player.health -= 20;
+    }
+    else if (player.guard === true){
+    player.health -= 2;
+
+    }
+    else{
+      player.health -= 4;
+    }
+    disableButton('attack');
+    disableButton('guard');
+    this.energy -= 5;
+    gTurn();
+  };
+
+  Monster.prototype.guard= function(){
+    disableButton('attack');
+    disableButton('guard');
+    this.guard = true;
+    gTurn();
+  };
+
+
+
+  function Hand(){
+    this.cards = [];
   }
 
   Hand.prototype.addCard = function(card){
@@ -36,7 +74,6 @@ $(document).ready(function () {
     var total =0;
     var ace = 0;
     this.cards.forEach(function(e){
-      console.log('test');
       var x = e.point;
       if (e.point > 10 ) {
         x = 10;
@@ -55,14 +92,6 @@ $(document).ready(function () {
     return total;
   };
 
-  Hand.prototype.attack= function(player, damage){
-    if (this.energy >= 16){
-      player.health -= 20;
-    }
-    else{
-    player.health -= damage;
-    }
-  };
 
   function Deck(){
     this.cards = [];
@@ -126,10 +155,14 @@ $(document).ready(function () {
     dealerTurn();
   }
 
+  function gTurn(){
+
+  }
+
 
 
   function drawBoard(dturn){
-
+    $('#energy').text('Energy: ' + robot.energy);
     $('#dealer-hand').children().remove();
     $('#player-hand').children().remove();
     pHand.cards.forEach(function(e){
@@ -153,6 +186,16 @@ $(document).ready(function () {
     else{
       $('#dealer-points').text("");
     }
+
+    if(robot.energy >= 16){
+      $('#attack-button').attr('src','./media/special.png');
+    }
+    else{
+      $('#attack-button').attr('src','./media/attack.png');
+    }
+
+    $('.rHP').text('Robobobot  HP: '+ robot.health);
+    $('.gHP').text('Non-copyright lizard man  HP: '+ liz.health);
   }
 
   function disableButton(button){
@@ -171,6 +214,14 @@ $(document).ready(function () {
     else if (button === 'reset'){
       $('#reset-button').css('opacity','0.33');
       $('#reset-button').css('pointerEvents','none');
+    }
+    else if (button === 'attack'){
+      $('#attack-button').css('opacity','0.3');
+      $('#attack-button').css('pointerEvents','none');
+    }
+    else if (button === 'guard'){
+      $('#guard-button').css('opacity','0.33');
+      $('#guard-button').css('pointerEvents','none');
     }
   }
   function enableButton(button){
@@ -213,21 +264,21 @@ $(document).ready(function () {
   function winCheck(){
     if (pHand.getPoints() <= 21 && pHand.getPoints() > dHand.getPoints() || pHand.getPoints() <= 21 && dHand.getPoints() > 21) {
       $('#messages').text('You win!');
-      pHand.energy += 3;
-      dHand.energy -=1;
+      robot.energy += 3;
+      liz.energy -=1;
 
     }
     else if(pHand.getPoints() > 21 && dHand.getPoints() > 21 || pHand.getPoints() == dHand.getPoints()){
       $('#messages').text('DRAW!');
     }else{
         $('#messages').text('You Lose!');
-        dHand.energy += 3;
-        pHand.energy -= 1;
+        liz.energy += 3;
+        robot.energy -= 1;
     }
       enableButton('reset');
-      if (pHand.energy >=4){
-        if (pHand.energy >=15){
-          $('attack-button').attrib('src','url(./media/special.png)');
+      if (robot.energy >=4){
+        if (robot.energy >=15){
+          $('attack-button').attr('src','./media/special.png');
         }
         enableButton('attack');
       }
@@ -237,13 +288,14 @@ $(document).ready(function () {
     deck = new Deck();
     dHand = new Hand();
     pHand = new Hand();
-
     $('#messages').text('BlackJack');
-    $('attack-button').attrib('src','url(./media/attack.png)');
-    enableButton('hit');
-    enableButton('stand');
+    //$('#attack-button').attr('src','./media/attack.png');
+
+
     enableButton('deal');
     disableButton('reset');
+    disableButton('attack');
+    disableButton('guard');
     drawBoard();
   }
 
@@ -280,7 +332,10 @@ $(document).ready(function () {
     reset();
   });
   $('.buttons').on('click','#attack-button', function(e){
-    attack(dHand);
+    if(robot.energy >= 5){
+      robot.attack(liz);
+      reset();
+    }
   });
   $('.buttons').on('click','#guard-button', function(e){
     guard();
@@ -289,8 +344,13 @@ $(document).ready(function () {
   var deck = new Deck();
   var dHand = new Hand();
   var pHand = new Hand();
+  var robot = new Monster('robot');
+  var liz = new Monster('godzilla');
+
   disableButton('hit');
   disableButton('stand');
   disableButton('reset');
+  disableButton('attack');
+  disableButton('guard');
 
 });

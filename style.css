@@ -17,7 +17,7 @@ body{
 }
 .dealer-layer {
   position: relative;
-  border: 2px solid black;
+  /*border: 2px solid black;*/
   float: left;
   font-family: 'Titillium Web', sans-serif;
   /*margin-top: 6%;*/
@@ -45,10 +45,15 @@ body{
   height: 5vw;
 }
 .arena{
+  margin-top: 2%;
   float: left;
   width: 100%;
   clear: both;
 
+}
+.vs{
+  margin-left: 5%;
+  width: 10%;
 }
 .rHP{
   background-color: red;
@@ -71,6 +76,7 @@ body{
 }
 
 #energy{
+  margin-top: 2vh;
   font-size: 1em;
   text-shadow: -2px 0 #000000,0 2px #000000,2px 0 #000000,0 -2px #000000;
   color: white;
@@ -83,11 +89,11 @@ body{
   /*border: 2px solid red;*/
   font-family: 'Titillium Web', sans-serif;
   float: left;
-  margin-left: 23vw;
+  /*margin-left: 23vw;*/
   color: white;
   /*height: 50px;*/
-  width: 25%;
-  font-size: 4em;
+  width: 100%;
+  font-size: 2.5em;
   /*margin-top: 5%;*/
   text-shadow: -2px 0 #000000,0 2px #000000,2px 0 #000000,0 -2px #000000;
   clear: both;
@@ -107,7 +113,7 @@ body{
   opacity: .75;
   border-radius: 40px;
   margin-right: 1vw;
-  margin-top: 2vw;
+  margin-top: 1vw;
 }
 
 .fighters{
