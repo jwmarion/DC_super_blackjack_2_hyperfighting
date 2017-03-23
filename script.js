@@ -47,17 +47,29 @@ $(document).ready(function () {
     else{
       player.health -= 4;
     }
+
     disableButton('attack');
     disableButton('guard');
     this.energy -= 5;
-    gTurn();
+
+  if(this.name === 'robot'){
+
+    RaG.play();
+    RaG.progress(0);
+  }
+  else{
+    console.log('test');
+    GaR.play();
+    GaR.progress(0);
+
+  }
+
   };
 
   Monster.prototype.guard= function(){
     disableButton('attack');
     disableButton('guard');
     this.guard = true;
-    gTurn();
   };
 
 
@@ -130,7 +142,6 @@ $(document).ready(function () {
   };
 
   function deal(){
-    console.log('test1');
     initialDeal();
     drawBoard(true);
     disableButton('deal');
@@ -156,7 +167,11 @@ $(document).ready(function () {
   }
 
   function gTurn(){
-
+    if(liz.energy >= 5 )
+       liz.attack(robot);
+    else if (liz.energy >=3){
+      liz.guard();
+    }
   }
 
 
@@ -263,15 +278,15 @@ $(document).ready(function () {
 
   function winCheck(){
     if (pHand.getPoints() <= 21 && pHand.getPoints() > dHand.getPoints() || pHand.getPoints() <= 21 && dHand.getPoints() > 21) {
-      $('#messages').text('You win!');
+      // $('#messages').text('You win!');
       robot.energy += 3;
       liz.energy -=1;
 
     }
     else if(pHand.getPoints() > 21 && dHand.getPoints() > 21 || pHand.getPoints() == dHand.getPoints()){
-      $('#messages').text('DRAW!');
+      // $('#messages').text('DRAW!');
     }else{
-        $('#messages').text('You Lose!');
+        // $('#messages').text('You Lose!');
         liz.energy += 3;
         robot.energy -= 1;
     }
@@ -285,10 +300,11 @@ $(document).ready(function () {
   }
 
   function reset(){
+    gTurn();
     deck = new Deck();
     dHand = new Hand();
     pHand = new Hand();
-    $('#messages').text('BlackJack');
+    // $('#messages').text('BlackJack');
     //$('#attack-button').attr('src','./media/attack.png');
 
 
@@ -340,7 +356,8 @@ $(document).ready(function () {
   $('.buttons').on('click','#guard-button', function(e){
     guard();
   });
-
+  var RaG = new TimelineMax({paused:'true'});
+  var GaR = new TimelineMax({paused:'true'});
   var deck = new Deck();
   var dHand = new Hand();
   var pHand = new Hand();
@@ -352,5 +369,37 @@ $(document).ready(function () {
   disableButton('reset');
   disableButton('attack');
   disableButton('guard');
+
+  $('#laser').css('opacity','0');
+  $('#fireBall').css('opacity','0');
+  RaG.add(TweenMax.to("#robot", 0.1,{
+        y:"+=20",
+        yoyo:true,
+        repeat:5
+      },1));
+  RaG.add(TweenMax.to("#laser",0.1,{opacity:1}));
+  RaG.add(TweenMax.to("#laser",0.5,{visibility:"visible", marginLeft: 250}));
+  RaG.add(TweenMax.to("#laser",0.1,{opacity:0}));
+  RaG.add(TweenMax.to("#godzilla", 0.1,{
+    x:"+=20",
+    yoyo:true,
+    repeat:5
+  },5));
+
+
+  GaR.add(TweenMax.to("#godzilla", 0.1,{
+        y:"+=20",
+        yoyo:true,
+        repeat:5,
+        delay:2
+      }, "+=2"));
+  GaR.add(TweenMax.to("#fireBall",0.1,{opacity:1}));
+  GaR.add(TweenMax.to("#fireBall",0.5,{visibility:"visible", marginRight: 300},1));
+  GaR.add(TweenMax.to("#fireBall",0.1,{opacity:0}));
+  GaR.add(TweenMax.to("#robot", 0.1,{
+    x:"+=20",
+    yoyo:true,
+    repeat:5
+  }));
 
 });

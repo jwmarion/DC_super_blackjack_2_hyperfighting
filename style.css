@@ -5,99 +5,120 @@ body{
   background: url('./media/triangular.png');
 }
 .content{
-  margin-left: 15vw;
   position: relative;
+  /*height: 100vh;*/
+
+  width: 63vw;
+  height: 100vh;
+  margin-left: 15vw;
+
+  border: 6px solid lightgrey;
   background-image: url('media/t1.gif');
   background-repeat: no-repeat;
   background-size: contain;
-  /*height: 100vh;*/
-  width: 63vw;
-  height: 100vh;
-  border: 6px solid lightgrey;
 }
 .dealer-layer {
   position: relative;
   /*border: 2px solid black;*/
+
   float: left;
+  clear: both;
+
+  width: 60%;
+  height: 30%;
+
+  letter-spacing: 1.5px;
+
+  color: white;
+  text-shadow: -2px 0 #000000,0 2px #000000,2px 0 #000000,0 -2px #000000;
+
   font-family: 'Titillium Web', sans-serif;
   /*margin-top: 6%;*/
   /*margin-left: 17%;*/
   font-weight: bolder;
-  text-shadow: -2px 0 #000000,0 2px #000000,2px 0 #000000,0 -2px #000000;
-  color: white;
-  letter-spacing: 1.5px;
-  clear: both;
-  width: 60%;
-  height: 30%;
 }
 
 
 .buttons {
   float: right;
   /*border: 2px solid red;*/
+
   width: 40%;
 }
 
 .hand {
   position: relative;
-  background-color: rgba(255,255,255,0.2);
+
   width: 100%;
   height: 5vw;
+
+  background-color: rgba(255,255,255,0.2);
 }
 .arena{
-  margin-top: 2%;
   float: left;
-  width: 100%;
   clear: both;
+
+  width: 100%;
+  margin-top: 2%;
 
 }
 .vs{
-  margin-left: 5%;
   width: 10%;
+  margin-left: 5%;
 }
 .rHP{
-  background-color: red;
-  text-shadow: -2px 0 #000000,0 2px #000000,2px 0 #000000,0 -2px #000000;
   float: left;
-  height: 100%;
+
   width:40%;
+  height: 100%;
+
   color: white;
   border: 2px solid grey;
+  background-color: red;
+  text-shadow: -2px 0 #000000,0 2px #000000,2px 0 #000000,0 -2px #000000;
 }
 .gHP{
-  text-align: right;
-  background-color: red;
-  text-shadow: -2px 0 #000000,0 2px #000000,2px 0 #000000,0 -2px #000000;
   float: right;
-  height: 100%;
+
   width:40%;
+  height: 100%;
+
+  text-align: right;
+
   color: white;
   border: 2px solid grey;
+  background-color: red;
+  text-shadow: -2px 0 #000000,0 2px #000000,2px 0 #000000,0 -2px #000000;
 }
 
 #energy{
   margin-top: 2vh;
-  font-size: 1em;
-  text-shadow: -2px 0 #000000,0 2px #000000,2px 0 #000000,0 -2px #000000;
+
   color: white;
+  text-shadow: -2px 0 #000000,0 2px #000000,2px 0 #000000,0 -2px #000000;
+
+  font-size: 1em;
 }
 #table{
   /*text-align: center;*/
 }
 #messages{
-
-  /*border: 2px solid red;*/
-  font-family: 'Titillium Web', sans-serif;
-  float: left;
-  /*margin-left: 23vw;*/
-  color: white;
+  clear: both;
   /*height: 50px;*/
+
   width: 100%;
-  font-size: 2.5em;
+  padding-top: none;
+
+  text-align: center;
+  /*margin-left: 23vw;*/
+
+  color: white;
   /*margin-top: 5%;*/
   text-shadow: -2px 0 #000000,0 2px #000000,2px 0 #000000,0 -2px #000000;
-  clear: both;
-  padding-top: none;
+  /*border: 2px solid red;*/
+
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 2.5em;
 
 }
 #dealer-hand{
@@ -108,34 +129,52 @@ body{
 }
 .button{
   float: right;
+
   width:28%;
-  background-color: rgba(255,255,255);
+  margin-top: 1vw;
+  margin-right: 1vw;
+
   opacity: .75;
   border-radius: 40px;
-  margin-right: 1vw;
-  margin-top: 1vw;
+  background-color: rgba(255,255,255);
+}
+.fighters{
+  width: 25%;
+  margin-top: 15vh;
 }
 
-.fighters{
-  margin-top: 15vh;
-  width: 25%;
-}
 #godzilla{
   float: right;
 }
+
 
 #robot{
   float: left;
 }
 
 #robotRange{
-  padding-top: 10vh;
-  clear: both;
   float: left;
-  border: 2px solid red;
-  height: 100%;
-}
+  clear: both;
 
+  height: 100%;
+  padding-top: 10vh;
+
+  border: 2px solid red;
+}
+#laser{
+  float: left;
+
+  width: 10vw;
+  margin-top: 12vh;
+}
+#fireBall{
+  position: absolute;
+  right: 10vw;
+  top: 29vw;
+
+  width: 7vw;
+  margin-top: 14vh;
+}
 #deal-button{
 
 }
