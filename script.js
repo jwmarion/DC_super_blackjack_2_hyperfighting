@@ -26,13 +26,6 @@ $(document).ready(function () {
     this.energy = 10;
     this.health = 16;
     this.name = name;
-    // this.guard = false;
-    // if (name === 'robot'){
-    //   this.name = $('#robot');
-    // }
-    // else{
-    //   this.name = $('#godzilla');
-    // }
 
   }
 
@@ -53,15 +46,13 @@ $(document).ready(function () {
     this.energy -= 5;
 
   if(this.name === 'robot'){
-
     RaG.play();
     RaG.progress(0);
+
   }
   else{
-    console.log('test');
     GaR.play();
     GaR.progress(0);
-
   }
 
   };
@@ -281,7 +272,6 @@ $(document).ready(function () {
       // $('#messages').text('You win!');
       robot.energy += 3;
       liz.energy -=1;
-
     }
     else if(pHand.getPoints() > 21 && dHand.getPoints() > 21 || pHand.getPoints() == dHand.getPoints()){
       // $('#messages').text('DRAW!');
@@ -304,9 +294,6 @@ $(document).ready(function () {
     deck = new Deck();
     dHand = new Hand();
     pHand = new Hand();
-    // $('#messages').text('BlackJack');
-    //$('#attack-button').attr('src','./media/attack.png');
-
 
     enableButton('deal');
     disableButton('reset');
@@ -371,21 +358,23 @@ $(document).ready(function () {
   disableButton('guard');
 
   $('#laser').css('opacity','0');
-  $('#fireBall').css('opacity','0');
+   $('#fireBall').css('opacity','0');
+
   RaG.add(TweenMax.to("#robot", 0.1,{
         y:"+=20",
         yoyo:true,
         repeat:5
       },1));
   RaG.add(TweenMax.to("#laser",0.1,{opacity:1}));
-  RaG.add(TweenMax.to("#laser",0.5,{visibility:"visible", marginLeft: 250}));
+  RaG.add(TweenMax.to("#laser",0.5,{visibility:"visible", marginLeft: 200}));
   RaG.add(TweenMax.to("#laser",0.1,{opacity:0}));
+  RaG.add(TweenMax.to("#laser",0.1,{marginLeft: 0}));
+  RaG.add(TweenMax.to("#fireBall"),0.1,{top:0});
   RaG.add(TweenMax.to("#godzilla", 0.1,{
     x:"+=20",
     yoyo:true,
     repeat:5
   },5));
-
 
   GaR.add(TweenMax.to("#godzilla", 0.1,{
         y:"+=20",
@@ -394,8 +383,10 @@ $(document).ready(function () {
         delay:2
       }, "+=2"));
   GaR.add(TweenMax.to("#fireBall",0.1,{opacity:1}));
-  GaR.add(TweenMax.to("#fireBall",0.5,{visibility:"visible", marginRight: 300},1));
+  GaR.add(TweenMax.to("#fireBall",0.5,{visibility:"visible", marginRight: 200},1));
   GaR.add(TweenMax.to("#fireBall",0.1,{opacity:0}));
+  RaG.add(TweenMax.to("#laser",0.1,{marginRight: 0}));
+  RaG.add(TweenMax.to("#fireBall"),0.1,{top:0});
   GaR.add(TweenMax.to("#robot", 0.1,{
     x:"+=20",
     yoyo:true,
